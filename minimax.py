@@ -1,8 +1,8 @@
 class Nodo:
 	def __init__(self, estado, pai, acao, alfa, beta):
-		self.estado = estado
+		self.estado = estado # tabuleiro
 		self.pai = pai
-		self.acao = acao
+		self.acao = acao # onde coloca sua peça
 		self.alfa_beta = (alfa, beta)
 	def imprimeNodo(self):
 		print("(" + self.acao + "," + self.estado + "," + str(self.alfa_beta) + "," + self.pai.estado + ")", end = "")

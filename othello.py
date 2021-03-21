@@ -1,5 +1,6 @@
 import sys 
 from collections import deque
+from numpy import inf
 from minimax import *
 
 def le_arquivo_e_atualiza_tabuleiro(arquivo, tabuleiro):
@@ -14,7 +15,8 @@ def le_arquivo_e_atualiza_tabuleiro(arquivo, tabuleiro):
 			y += 1
 	return tabuleiro
 
-def busca_possiveis_posicoes(jogador, adversario, tabuleiro):
+def sucessor(jogador, tabuleiro):
+	adversario = devolve_adversario(jogador)
 	possiveis_posicoes = deque()
 	for coord in tabuleiro:
 		if tabuleiro[coord] == adversario:
@@ -124,20 +126,24 @@ def devolve_adversario(jogador):
 		return 'B'
 
 def main():
-	tabuleiro = {}
+	grafo = {}
+	estado_tabuleiro = {}
 
 	arquivo_de_estado = sys.argv[1]
 	nome_jogador = sys.argv[2]
 	jogador = nome_jogador[0].upper()
 
-	tabuleiro = le_arquivo_e_atualiza_tabuleiro(arquivo_de_estado, tabuleiro)
-	print(tabuleiro)
-	adversario = devolve_adversario(jogador)
-	possiveis_posicoes = busca_possiveis_posicoes(jogador, adversario, tabuleiro)
-	print(possiveis_posicoes)
-	print(conta_pecas(jogador, tabuleiro))
+	estado_tabuleiro = le_arquivo_e_atualiza_tabuleiro(arquivo_de_estado, estado_tabuleiro)
+	print(estado_tabuleiro)
 
-
+	# #  Nodo(estado, pai, acao, alfa, beta)
+	# pai = Nodo(estado_tabuleiro, 0, "", inf, -inf)
+	# grafo[pai] = []
+	# estados = sucessor(jogador, estado_tabuleiro)
+	# for e in estados:
+	# 	filho = Nodo(, pai, e, alfa, beta)
+	# 	grafo[pai].append(filho)
+	# 	filho.imprimeNodo()
 
 if __name__ == '__main__':
 	main()
