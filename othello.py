@@ -1,5 +1,6 @@
 import sys 
 from collections import deque
+from minimax import *
 
 def le_arquivo_e_atualiza_tabuleiro(arquivo, tabuleiro):
 	x = y = 0	# coordenadas
@@ -223,6 +224,7 @@ def main():
 	adversario = devolve_adversario(jogador)
 	possiveis_posicoes = busca_possiveis_posicoes(jogador, adversario, tabuleiro)
 	print(possiveis_posicoes)
+	print(conta_pecas(jogador, tabuleiro))
 
 
 
