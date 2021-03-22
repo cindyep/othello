@@ -1,7 +1,8 @@
 import board
+from numpy import inf
 
 def decisao_minimax(estado, cor_jogador, cor_oponente, profundidade):
-    return valor_max(estado, cor_jogador, cor_oponente, -100, 100, profundidade, True) #da o pontapé inicial
+    return valor_max(estado, cor_jogador, cor_oponente, -inf, inf, profundidade, True) #da o pontapé inicial
 #---------------------------------------------------------------------------------------------------------------------
 def valor_max(sting_tabuleiro, cor_jogador, cor_oponente, alfa, beta, profundidade, primeiria):
     #a string_tabuleiro se refere ao tabuleiro
@@ -15,7 +16,7 @@ def valor_max(sting_tabuleiro, cor_jogador, cor_oponente, alfa, beta, profundida
     jogadas_possiveis = tabuleiro.legal_moves(cor_jogador) #cria uma lista das jogadas possiveis para o jogador
     jogada_a_retornar = (-1, -1) #cria a variavel para guardar a jogada a ser feita
     for i in jogadas_possiveis: #verifica cada jogada possivel i
-        tabulerio = board.from_string(sting_tabuleiro) #recria o tabuleiro
+        tabuleiro = board.from_string(sting_tabuleiro) #recria o tabuleiro
         tabuleiro.process_move(i, cor_jogador) #faz a jogada i
         string_tabuleiro_novo = str(tabuleiro) #cria uma string do tabuleiro após a jogada i
         v = valor_min(string_tabuleiro_novo, cor_jogador, cor_oponente, alfa, beta, (profundidade - 1)) #faz o min do novo tabuleiro com frofundidade redusida
@@ -44,7 +45,7 @@ def valor_min(sting_tabuleiro, cor_jogador, cor_oponente, alfa, beta, profundida
         return tabuleiro.piece_count[cor_jogador]  #retorna o número de peças da cor do jogador contidas no tabuleiro
     jogadas_possiveis = tabuleiro.legal_moves(cor_oponente) #cria uma lista das jogadas possiveis para o oponente
     for i in jogadas_possiveis: #verifica cada jogada possivel i
-        tabulerio = board.from_string(sting_tabuleiro) #recria o tabuleiro
+        tabuleiro = board.from_string(sting_tabuleiro) #recria o tabuleiro
         tabuleiro.process_move(i, cor_oponente)  #faz a jogada i
         string_tabuleiro_novo = str(tabuleiro) #cria uma string do tabuleiro após a jogada i
         v = valor_max(string_tabuleiro_novo, cor_jogador, cor_oponente, alfa, beta, (profundidade - 1), False) #faz o max do novo tabuleiro com frofundidade redusida
